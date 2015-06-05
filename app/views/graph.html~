@@ -1,0 +1,3 @@
+<p>This is the graph view.</p>
+ <time-line data="data" options="options" events="events"></time-line>
+<vis-graph2d ng-show="graphLoaded" data="data" options="options" events="graphEvents"></vis-graph2d>
