@@ -14,4 +14,7 @@ angular.module('vakspamApp')
       'AngularJS',
       'Karma'
     ];
-  });
+  })
+.run(function($httpBackend){
+    $httpBackend.whenGET('views\/.*\..*').passThrough(); 
+});

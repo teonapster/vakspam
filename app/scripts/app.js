@@ -17,7 +17,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngVis'
+    'ngVis',
+    'ngMockE2E'
   ])
   .config(function ($routeProvider) {
     $routeProvider
