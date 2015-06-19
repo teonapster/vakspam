@@ -8,26 +8,29 @@
  * Controller of the vakspamApp
  */
 angular.module('vakspamApp')
-  .controller('GraphCtrl', function ($scope,VisDataSet,randVal,$http) {
+  .controller('GraphCtrl', function ($scope,businessNames,VisDataSet,randVal,$http,httpService) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'graph'
     ];
 
-    //var randValues = randVal.randReviews(100000);
-    var randValues;
-    var items = [];
+    $scope.businesses = businessNames.data;
     
-    $http.get('/reviews/').then(function(reviews){
-        var rev = reviews.data;
+    $scope.update = function(){
+        httpService.makeCall('GET','/reviews/',{_id: $scope.bid._id.bid}).then(function(res){
+           $scope.updateGraph(res.data); 
+        });
+    }
+    
+    $scope.updateGraph = function(timeline){
+        var items = [];
+        var rev =timeline;
 
         for(var i=0;i<rev.length;++i)
             items.push({ x: rev[i].date, y: rev[i].value });
-
         $scope.data = {items: new vis.DataSet(items)};
-    });
-    
+    }
     $scope.options = {
         dataAxis: { showMinorLabels: false },
         style:'bar',

@@ -33,9 +33,6 @@ angular
         templateUrl: 'views/graph.html',
         controller: 'GraphCtrl',
         resolve:{
-            timeline: function($http){
-                return $http.get('/reviews/');
-            },
             businessNames: function($http){
                 return $http.get('/business/');
             }
