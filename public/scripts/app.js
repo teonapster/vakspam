@@ -31,7 +31,15 @@ angular
     })
       .when('/graph', {
         templateUrl: 'views/graph.html',
-        controller: 'GraphCtrl'
+        controller: 'GraphCtrl',
+        resolve:{
+            timeline: function($http){
+                return $http.get('/reviews/');
+            },
+            businessNames: function($http){
+                return $http.get('/business/');
+            }
+        }
     })
       .when('/test' , {
         templateUrl : 'views/test.html',

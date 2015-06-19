@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,7 +9,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var test_db = require('./routes/testdb');
 var reviews = require('./routes/reviews');
-
+var business = require('./routes/business');
+var getConnection = require('./connection.js');
 var app = express();
 
 // view engine setup
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', test_db);
 
 app.use('/reviews', reviews);
+app.use('/business',business);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

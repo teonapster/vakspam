@@ -25,7 +25,7 @@ angular.module('vakspamApp')
                 stars:rnd(0,starRange),
                 user_id:rnd(1,size/userFactor),
                 business_id:rnd(1,size/businessFactor),
-                date:'2015-'+rnd(1,12)+'-'+rnd(1,31),
+                date:'2011-'+rnd(1,12)+'-'+rnd(1,31),
                 review_id:i
             });
         return reviews;
