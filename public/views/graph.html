@@ -1,7 +1,13 @@
-<p>This is the graph view.</p>
-<div class="col-xs-12">
-    <select ng-options="b as b.name for b in businesses" ng-model="bid" ng-change="update()" ></select>
-</div>
-<div class="col-xs-12">
-    <vis-graph2d data="data" options="options" ></vis-graph2d>
+<div class="panel panel-info">
+    <div class="panel-heading">Business Avg Score per Day</div>
+    <div class="panel-body">
+        <div class="col-xs-12">
+            <label class="">Select Business:</label>
+            <select ng-options="b as b.name for b in businesses" ng-model="bid" ng-change="update()" >              </select>
+            
+        </div><br/><br/>
+        <div class="col-xs-12">
+            <vis-graph2d data="data" options="options" ></vis-graph2d>
+        </div>
+    </div>
 </div>
