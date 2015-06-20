@@ -18,17 +18,18 @@ angular.module('vakspamApp')
     $scope.businesses = businessNames.data;
     
     $scope.update = function(){
-        httpService.makeCall('GET','/reviews/',{_id: $scope.bid._id.bid}).then(function(res){
+        httpService.makeCall('GET','/reviews/',{_id: $scope.bid.business_id}).then(function(res){
            $scope.updateGraph(res.data); 
         });
     }
     
     $scope.updateGraph = function(timeline){
+        var reviews = timeline[0].reviews;
         var items = [];
-        var rev =timeline;
-
-        for(var i=0;i<rev.length;++i)
-            items.push({ x: rev[i].date, y: rev[i].value });
+        angular.forEach(reviews,function(v,k){
+            items.push({ x: v._id.date, y: v.total_score });
+        });
+            
         $scope.data = {items: new vis.DataSet(items)};
     }
     $scope.options = {

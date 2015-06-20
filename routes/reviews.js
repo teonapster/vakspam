@@ -9,7 +9,10 @@ router.get('/', function (req, res) {
    getConnection(function(err,db) { 
         var col = db.collection('reviewFinal');
         
-        col.find({ "_id" : { "bid" : req.query._id }},{ reviews: true}).toArray(function(err, result) {
+        col.find({ "_id" : { "bid" : req.query._id }},{ reviews: true,
+                                                        lower_threshold: true,
+                                                        upper_threshold: true
+                                                      }).toArray(function(err, result) {
             res.send(result);
         });
 

@@ -7,7 +7,12 @@ router.get('/', function (req, res) {
     getConnection(function(err,db) {
          var col = db.collection('reviewFinal');
         col.find({ $query: {}, $orderby: { numdays: -1 } } ,{_id:true}).limit(100).toArray(function(err, result) {
-            res.send(result);
+            var ids = [];
+            for(var i=0;i<result.length;i++)
+                ids[i]=result[i]._id.bid;
+            db.collection('business').find({business_id: {$in: ids}}).toArray(function(err,resulT){
+                res.send(resulT);
+            });
         });
     });
 });
