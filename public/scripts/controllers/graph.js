@@ -45,6 +45,8 @@ angular.module('vakspamApp')
         });
         spam = spam*100/timeline[0].reviews.length;
         $scope.spamPer = Math.round(spam * 100) / 100
+        $scope.upperThreshold = Math.round(timeline[0].upper_threshold * 100) / 100;
+        $scope.lowerThreshold = Math.round(timeline[0].lower_threshold * 100) / 100;
         $scope.data = {items: new vis.DataSet(items),groups: groups};
     }
     $scope.options = {
