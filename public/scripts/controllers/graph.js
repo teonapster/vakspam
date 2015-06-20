@@ -23,20 +23,40 @@ angular.module('vakspamApp')
         });
     }
     
+    var groups = new vis.DataSet();
+     groups.add(
+          {
+            id: 1,
+            content: 'Normal review'
+          });
+    groups.add(
+            { id: 2,
+            content: 'Possible spam'
+          });
+    
     $scope.updateGraph = function(timeline){
         var reviews = timeline[0].reviews;
         var items = [];
+        var spam = 0;
         angular.forEach(reviews,function(v,k){
-            items.push({ x: v._id.date, y: v.total_score });
+            var group = v.total_score>timeline[0].upper_threshold||v.total_score<timeline[0].lower_threshold?2:1;
+            if(group==2)spam++;
+            items.push({ x: v._id.date, y: v.total_score, group: group, label: v._id.date});
         });
-            
-        $scope.data = {items: new vis.DataSet(items)};
+        spam = spam*100/timeline[0].reviews.length;
+        $scope.spamPer = Math.round(spam * 100) / 100
+        $scope.data = {items: new vis.DataSet(items),groups: groups};
     }
     $scope.options = {
         dataAxis: { showMinorLabels: false },
-        style:'bar',
+        style:'points',
         legend: {left:{position:"bottom-left"}},
         start: '2004-12-31',
-        end: '2016-06-18'
+        end: '2016-06-18',
+        drawPoints: {
+          enabled: true,
+          size: 6,
+          style: 'circle' // square, circle
+       },
     };
 });
