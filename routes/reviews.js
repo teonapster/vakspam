@@ -11,7 +11,9 @@ router.get('/', function (req, res) {
         
         col.find({ "_id" : { "bid" : req.query._id }},{ reviews: true,
                                                         lower_threshold: true,
-                                                        upper_threshold: true
+                                                        upper_threshold: true,
+                                                        avg_score: true,
+                                                        std_score: true
                                                       }).toArray(function(err, result) {
             res.send(result);
         });
