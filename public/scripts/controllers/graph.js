@@ -38,15 +38,16 @@ angular.module('vakspamApp')
         var reviews = timeline[0].reviews;
         var items = [];
         var spam = 0;
+        $scope.upperThreshold = Math.round((timeline[0].avg_score+3*timeline[0].std_score) * 100) / 100;
+        $scope.lowerThreshold = Math.round((timeline[0].avg_score-3*timeline[0].std_score) * 100) / 100;
         angular.forEach(reviews,function(v,k){
-            var group = v.total_score>timeline[0].upper_threshold||v.total_score<timeline[0].lower_threshold?2:1;
+            var group = v.total_score>$scope.upperThreshold||v.total_score<$scope.lowerThreshold?2:1;
             if(group==2)spam++;
             items.push({ x: v._id.date, y: v.total_score, group: group, label: v._id.date});
         });
         spam = spam*100/timeline[0].reviews.length;
         $scope.spamPer = Math.round(spam * 100) / 100
-        $scope.upperThreshold = Math.round((timeline[0].avg_score+3*timeline[0].std_score) * 100) / 100;
-        $scope.lowerThreshold = Math.round((timeline[0].avg_score-3*timeline[0].std_score) * 100) / 100;
+        
         $scope.data = {items: new vis.DataSet(items),groups: groups};
     }
     $scope.options = {
