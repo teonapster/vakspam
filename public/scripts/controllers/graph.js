@@ -31,7 +31,7 @@ angular.module('vakspamApp')
           });
     groups.add(
             { id: 2,
-            content: 'Possible spam'
+            content: 'Possible spam' 
           });
     
     $scope.updateGraph = function(timeline){
