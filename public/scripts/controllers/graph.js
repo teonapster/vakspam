@@ -43,10 +43,10 @@ angular.module('vakspamApp')
         angular.forEach(reviews,function(v,k){
             var group = v.total_score>$scope.upperThreshold||v.total_score<$scope.lowerThreshold?2:1;
             if(group==2)spam++;
-            items.push({ x: v._id.date, y: v.total_score, group: group, label: v._id.date});
+            items.push({ x: v._id.date, y: v.total_score, group: group, label: "skata"});
         });
         spam = spam*100/timeline[0].reviews.length;
-        $scope.spamPer = Math.round(spam * 100) / 100
+        $scope.spamPer = Math.round(spam * 100) / 100;
         
         $scope.data = {items: new vis.DataSet(items),groups: groups};
     }

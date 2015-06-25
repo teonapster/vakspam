@@ -38,6 +38,15 @@ angular
             }
         }
     })
+    .when('/bigraph', {
+        templateUrl: 'views/bigraph.html',
+        controller: 'BiGraphCtrl',
+        resolve:{
+            bigraph: function($http){
+                //TODO add async call here. Fetch graph nodes & edges   
+            }
+        }
+    })
       .when('/test' , {
         templateUrl : 'views/test.html',
         controller : 'TestCtrl'
