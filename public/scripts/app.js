@@ -42,8 +42,13 @@ angular
         templateUrl: 'views/bigraph.html',
         controller: 'BiGraphCtrl',
         resolve:{
-            bigraph: function($http){
-                //TODO add async call here. Fetch graph nodes & edges   
+           
+                
+            groups: function($http){
+                return $http.get('/bigraph/groups');
+            },
+            businessNames: function($http){
+                return $http.get('/business/');
             }
         }
     })

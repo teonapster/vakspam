@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var test_db = require('./routes/testdb');
 var reviews = require('./routes/reviews');
 var business = require('./routes/business');
+var bigraph = require('./routes/bigraph');
 var getConnection = require('./connection.js');
 var app = express();
 
@@ -32,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/reviews', reviews);
 app.use('/business',business);
+app.use('/bigraph',bigraph);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
