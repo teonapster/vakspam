@@ -11,7 +11,9 @@
                 <option value="Korean">Korean</option>
                 </select>
 <!--            <input type="text" value="Korean" ng-model="cat"/>-->
-            <button ng-click="getFilteredBigraph()"><i class="glyphicon glyphicon-refresh"> Refresh</i></button>
+                <i ng-click='showInfo()' class="glyphicon glyphicon-info-sign"></i>
+            <button class="col-xs-offset-1" ng-click="getFilteredBigraph()"><i class="glyphicon glyphicon-refresh "> Refresh</i></button>
+                
         </div><br/><br/>    
             <div id="graph" vis-network data="data" options="options" event="select" 
 			 callback="resultReady()" style="background-color: 'gray'; width: 100%; height: 800px"> 

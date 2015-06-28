@@ -18,6 +18,12 @@ angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpServic
             return ti+3; //fraud
     }
     
+    $scope.showInfo = function(){
+       messageCenterService.remove(0);
+    messageCenterService.add('info', '<div><label>Description: </label>Choose a business category from the drop-down list and  network will appear on the graph. </div>', {html:true});
+    }
+    
+    
     var validateCats = function(filterCat,businessCat){
         var valid = false;
         angular.forEach(filterCat,function(filter,index){
