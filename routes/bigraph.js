@@ -6,7 +6,7 @@ var getConnection = require('../connection.js');
 router.get('/', function (req, res) {
     getConnection(function(err,db) {
          var col = db.collection('bigraph');
-        col.find({ $query: {}, $orderby: { count: -1 } },{}).limit(1000).toArray(function(err, result) {
+        col.find({ $query: {}, $orderby: { count: -1 } },{}).limit(500).toArray(function(err, result) {
             res.send(result);
         });
     });

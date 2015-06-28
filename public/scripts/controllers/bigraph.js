@@ -51,7 +51,7 @@ u_uof: 11.70497*/
             var hasEdge = false;
             totalUsers++;
             //Add user 
-            nodes.push({"id":userIndex, "title": "user "+userIndex,"group": getCategory(user.ufr,true)}); //TODO add title
+            nodes.push({"id":userIndex, "title": "user "+user.uid,"group": getCategory(user.ufr,true)}); //TODO add title
            angular.forEach(user.rating,function(review,reviewIndex){
                var curPos = totalReviews+userCount;
                var exists = businesses.indexOf(review.bid);
@@ -77,12 +77,10 @@ u_uof: 11.70497*/
             if(!hasEdge)
                 nodes.pop();
         });
-        
-        $scope.data = {edges: new vis.DataSet(edges),nodes: new vis.DataSet(nodes)};
-//        $scope.data={
-//            edges: edges,
-//            nodes: nodes
-//        }
+        $scope.data={
+            edges: edges,
+            nodes: nodes
+        }
     }
             
             $scope.options = {
