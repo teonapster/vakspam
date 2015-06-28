@@ -1,6 +1,6 @@
-angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpService,businessNames,groups){
+angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpService,businessNames,groups,$filter){
     $scope.businesses = businessNames.data;
-    $scope.data = {};
+//    $scope.data = {};
     var groups = groups.data[0];
 //    var data = bigraph.data;
 //    
@@ -48,30 +48,33 @@ u_uof: 11.70497*/
         var edges = [];
         var userCount = data.length;
         var emptyUsers = 0;
+        var curNode = 0;
         angular.forEach(data,function(user,userIndex){
             var hasEdge = false;
             totalUsers++;
             //Add user 
-            nodes.push({"id":user.uid, "title": "user "+user.uid,"group": getCategory(user.ufr,true)}); //TODO add title
-            
+            nodes.push({"id":curNode++, "title": "user "+user.uid,"group": getCategory(user.ufr,true)}); //TODO add title
+            var curUser = curNode-1;
            angular.forEach(user.rating,function(review,reviewIndex){
-                
-               var curPos = totalReviews+userCount;
-               var exists = businesses.indexOf(review.bid);
                
+               var exists = $filter('filter')(businesses, {bid: review.bid})[0];
                var selectedCategories =[$scope.cat];
                var isValid = validateCats(selectedCategories,review.cat);
-               if(exists==-1&&isValid){
+
+               if(exists==undefined&&isValid){
                    //Add business
-                    nodes.push({"id": review.bid, "label": "","title": "business "+review.bid,"group": getCategory(review.bfr,false)}); //TODO add title     
-                    businesses.push(review.bid);
+                    nodes.push({"id": curNode++, "label": "","title": "business "+review.bid,"group": getCategory(review.bfr,false)}); //TODO add title     
+                    businesses.push({bid: review.bid, index: curNode-1});
                    totalBusinesses++;
                }
 
                //Add review
                if(isValid){
                    hasEdge = true;
-                   edges.push({"from": user.uid, "to": review.bid});
+                   var businessId = exists==undefined?curNode-1:exists.index;
+                   if(curUser==businessId)
+                       debugger;
+                   edges.push({"from": curUser, "to":businessId });
                    totalReviews++;
                }
            });
@@ -81,8 +84,8 @@ u_uof: 11.70497*/
             }
         });
         $scope.data={
-            edges: edges,
-            nodes: nodes
+            edges: new vis.DataSet(edges),
+            nodes: new vis.DataSet(nodes)
         }
     }
             
@@ -105,6 +108,32 @@ u_uof: 11.70497*/
                       type: 'dynamic'
                     }
                   },
+                 groups: {
+                  1: {
+                    shape: 'dot',
+                    color: '#2B7CE9' // blue
+                  },
+                  2: {
+                    shape: 'dot',
+                    color: "#FF9900" // orange
+                  },
+                  3: {
+                    shape: 'dot',
+                    color: "#C5000B" // purple
+                  },
+                  4: {
+                    shape: 'triangle',
+                    color: "#2B7CE9" // blue
+                  },
+                  5:{
+                    shape: 'triangle',
+                    color: "#FF9900"  //orange
+                  },
+                  6: {
+                    shape: 'triangle',
+                    color: "#C5000B" // green
+                  }
+                },
                 physics: { stabilization: false }
             };
             //var network = new vis.Network(container, data, options);
