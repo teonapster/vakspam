@@ -74,13 +74,10 @@ u_uof: 11.70497*/
                    edges.push({"from": user.uid, "to": review.bid});
                    totalReviews++;
                }
-               else{
-                hasEdge = false;   
-               }
            });
-            if(!hasEdge){
+            if(user.rating.length<=1||hasEdge==false){
                 emptyUsers++;
-                nodes.pop();
+                nodes.splice(nodes.length-1);
             }
         });
         $scope.data={
