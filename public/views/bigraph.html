@@ -1,12 +1,16 @@
 <div class="col-xs-12 col-sm-8 col-sm-offset-1">
+    <mc-messages></mc-messages>
 <div class="panel panel-info">
     <div class="panel-heading">Business Total Score per Day</div>
-    
     <div class="panel-body">
             <div class="col-xs-12">
             <label class="">Type Category:</label>
                 <!--Building Supplies, Home Services-->
-            <input type="text" value="Korean" ng-model="cat"/>
+            <select ng-model="cat">
+                <option value="Building Supplies">Building Supplies</option>
+                <option value="Korean">Korean</option>
+                </select>
+<!--            <input type="text" value="Korean" ng-model="cat"/>-->
             <button ng-click="getFilteredBigraph()"><i class="glyphicon glyphicon-refresh"> Refresh</i></button>
         </div><br/><br/>    
             <div id="graph" vis-network data="data" options="options" event="select" 

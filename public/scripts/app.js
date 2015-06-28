@@ -12,12 +12,12 @@ angular
   .module('vakspamApp', [
     'ngAnimate',
     'ngCookies',
-    'ngMessages',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngVis'
+    'ngVis',
+    'MessageCenterModule'
 ])
   .config(function ($httpProvider){
        var HttpProviderInterceptor =

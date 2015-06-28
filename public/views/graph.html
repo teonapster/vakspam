@@ -3,10 +3,8 @@
 <div class="panel">
     <!--<div class="panel-heading">Description</div>-->
     <div class="panel-body">
-    <div><label>Description</label>
-    Choose a business from the drop-down list and a review timeline will appear on the graph. Days with suspicious review activity are annotated with a different color.</div>
-    <br />
-    <div><label>Notes:</label> Each dot contains all reviews submitted on the same day. Our algorithm uses a sophisticated method to transform ratings into a meaningful construct that accurately detects outliers.</div>
+    <mc-messages></mc-messages>
+        
     </div>
 </div>
 
@@ -14,9 +12,10 @@
     <div class="panel-heading">Business Total Score per Day</div>
     <div class="panel-body">
         <div class="col-xs-12">
+            
             <label class="">Select Business:</label>
             <select  style='width:150px' ng-options="b as b.name for b in businesses" ng-model="bid" ng-change="update()" >              </select>
-            
+            <i ng-click='showInfo()'class="glyphicon glyphicon-info-sign"></i>
         </div><br/><br/>
         <div class="col-xs-12">
             <vis-graph2d data="data" options="options" ></vis-graph2d>

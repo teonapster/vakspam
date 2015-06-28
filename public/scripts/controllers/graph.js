@@ -8,13 +8,17 @@
  * Controller of the vakspamApp
  */
 angular.module('vakspamApp')
-  .controller('GraphCtrl', function ($scope,businessNames,VisDataSet,randVal,$http,httpService) {
+  .controller('GraphCtrl', function ($scope,businessNames,VisDataSet,randVal,$http,httpService,messageCenterService) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'graph'
     ];
 
+    $scope.showInfo = function(){
+       messageCenterService.remove(0);
+    messageCenterService.add('info', '<div><label>Description: </label>Choose a business from the drop-down list and a review timeline will appear on the graph. Days with suspicious review activity are annotated with a different color.</div><br /><div><label>Notes:</label> Each dot contains all reviews submitted on the same day. Our algorithm uses a sophisticated method to transform ratings into a meaningful construct that accurately detects outliers.</div>', {html:true});
+    }
     $scope.businesses = businessNames.data;
     
     $scope.update = function(){

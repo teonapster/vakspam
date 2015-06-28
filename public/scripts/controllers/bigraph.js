@@ -1,4 +1,4 @@
-angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpService,businessNames,groups,$filter){
+angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpService,businessNames,groups,$filter,messageCenterService,$timeout,$rootScope){
     $scope.businesses = businessNames.data;
 //    $scope.data = {};
     var groups = groups.data[0];
@@ -30,6 +30,10 @@ angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpServic
     }
     
     $scope.getFilteredBigraph = function(){
+    $timeout(function() {
+       if($rootScope.busy)
+       messageCenterService.add('warning', 'This feature may take some time.... Be patient', { timeout: 5000 });
+    }, 5000);        
      httpService.makeCall('GET','/bigraph/',{categories: $scope.cat}).then(function(res){
            updateNetwork(res.data); 
         });
