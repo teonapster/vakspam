@@ -47,12 +47,15 @@ u_uof: 11.70497*/
         var nodes = []; 
         var edges = [];
         var userCount = data.length;
+        var emptyUsers = 0;
         angular.forEach(data,function(user,userIndex){
             var hasEdge = false;
             totalUsers++;
             //Add user 
-            nodes.push({"id":userIndex, "title": "user "+user.uid,"group": getCategory(user.ufr,true)}); //TODO add title
+            nodes.push({"id":user.uid, "title": "user "+user.uid,"group": getCategory(user.ufr,true)}); //TODO add title
+            
            angular.forEach(user.rating,function(review,reviewIndex){
+                
                var curPos = totalReviews+userCount;
                var exists = businesses.indexOf(review.bid);
                
@@ -64,18 +67,21 @@ u_uof: 11.70497*/
                     businesses.push(review.bid);
                    totalBusinesses++;
                }
-               else
-                    curPos = businesses[exists];
 
                //Add review
                if(isValid){
                    hasEdge = true;
-                   edges.push({"from": userIndex, "to": curPos});
+                   edges.push({"from": user.uid, "to": review.bid});
                    totalReviews++;
                }
+               else{
+                hasEdge = false;   
+               }
            });
-            if(!hasEdge)
+            if(!hasEdge){
+                emptyUsers++;
                 nodes.pop();
+            }
         });
         $scope.data={
             edges: edges,
