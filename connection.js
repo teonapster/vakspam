@@ -4,7 +4,7 @@ var getConnection= function getConnection(callback) {
     if (db_singleton) {
         callback(null,db_singleton);
     } else {
-        var connURL = "mongodb://vakspam:diskotsoutsouni@83.212.121.195/vakspam";
+        var connURL = "mongodb://vakspam:hiddenpass@83.212.121.195/vakspam";
         MongoClient.connect(connURL,function(err,db){
             if(err)
                 console.log("Error creating new connection "+err);
