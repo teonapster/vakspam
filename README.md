@@ -13,8 +13,8 @@ so run <code> bower install </code> inside ./vakspam/public
  * <code> npm install </code> in the root folder (./vakspam)
  
 
-##Run vakspam
+##Run SpamJam
 Run <code> node ./bin/www in ./vakspam folder (node package is needed here)
 
-##Debug vakspam
+##Debug SpamJam
 Run <code> node-debug ./bin/www in ./vakspam folder (node-debug package is needed here)
