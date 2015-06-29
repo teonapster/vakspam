@@ -20,7 +20,7 @@ angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpServic
     
     $scope.showInfo = function(){
        messageCenterService.remove(0);
-    messageCenterService.add('info', '<div><label>Description: </label>Choose a business category from the drop-down list and  network will appear on the graph. </div>', {html:true});
+    messageCenterService.add('info', '<div><label>Description: </label>Choose a business category from the drop-down menu and a network will appear on the graph. A node can either be a user or a business and each edge represents a review written by a user for a business.</div> <div><label>Note: </label> Please be patient, as the process takes some time, especially for the more popular categories. </div>', {html:true});
     }
     
     
@@ -38,7 +38,7 @@ angular.module('vakspamApp').controller('BiGraphCtrl',function($scope,httpServic
     $scope.getFilteredBigraph = function(){
     $timeout(function() {
        if($rootScope.busy)
-       messageCenterService.add('warning', 'This feature may take some time.... Be patient', { timeout: 5000 });
+       messageCenterService.add('warning', 'Preparing the visualization may take some time. Please wait... (Free tip: Grab the chance and have some delicious marmalade-spiced ham combo)', { timeout: 5000 });
     }, 5000);        
      httpService.makeCall('GET','/bigraph/',{categories: $scope.cat}).then(function(res){
            updateNetwork(res.data); 
@@ -63,7 +63,7 @@ u_uof: 11.70497*/
             var hasEdge = false;
             totalUsers++;
             //Add user 
-            nodes.push({"id":curNode++, "title": "user "+user.uid,"group": getCategory(user.ufr,true)}); //TODO add title
+            nodes.push({"id":curNode++, "title": "user "+user.uid,"group": getCategory(user.ufr,true), "value": getCategory(user.ufr,true)}); //TODO add title
             var curUser = curNode-1;
            angular.forEach(user.rating,function(review,reviewIndex){
                
@@ -73,7 +73,7 @@ u_uof: 11.70497*/
 
                if(exists==undefined&&isValid){
                    //Add business
-                    nodes.push({"id": curNode++, "label": "","title": "business "+review.bid,"group": getCategory(review.bfr,false)}); //TODO add title     
+                    nodes.push({"id": curNode++, "label": "","title": "business "+review.bid,"group": getCategory(review.bfr,false), "value": getCategory(review.bfr,false) * 10}); //TODO add title
                     businesses.push({bid: review.bid, index: curNode-1});
                    totalBusinesses++;
                }
@@ -102,9 +102,10 @@ u_uof: 11.70497*/
             $scope.options = {
                   nodes: {
                     shape: 'dot',
+                    size: 50,
                     scaling: {
                       min: 10,
-                      max: 30
+                      max: 50
                     },
                     font: {
                       size: 12,
@@ -119,30 +120,12 @@ u_uof: 11.70497*/
                     }
                   },
                  groups: {
-                  1: {
-                    shape: 'dot',
-                    color: '#2B7CE9' // blue
-                  },
-                  2: {
-                    shape: 'dot',
-                    color: "#FF9900" // orange
-                  },
-                  3: {
-                    shape: 'dot',
-                    color: "#C5000B" // purple
-                  },
-                  4: {
-                    shape: 'triangle',
-                    color: "#2B7CE9" // blue
-                  },
-                  5:{
-                    shape: 'triangle',
-                    color: "#FF9900"  //orange
-                  },
-                  6: {
-                    shape: 'triangle',
-                    color: "#C5000B" // green
-                  }
+                  1: { shape:   'circle', color:   'blue' },
+                  2: { shape:   'circle', color: 'orange' },
+                  3: { shape:   'circle', color:    'red' },
+                  4: { shape: 'triangle', color:  'green' },
+                  5: { shape: 'triangle', color: 'orange' },
+                  6: { shape: 'triangle', color:    'red' }
                 },
                 physics: { stabilization: false }
             };
