@@ -1,14 +1,35 @@
 <div class="col-xs-12 col-sm-8 col-sm-offset-1">
     <mc-messages></mc-messages>
 <div class="panel panel-info">
-    <div class="panel-heading">Business Total Score per Day</div>
+    <div class="panel-heading">User-Business Overseer</div>
     <div class="panel-body">
             <div class="col-xs-12">
-            <label class="">Type Category:</label>
+            <label class="">Business Category:</label>
                 <!--Building Supplies, Home Services-->
             <select ng-model="cat">
                 <option value="Building Supplies">Building Supplies</option>
                 <option value="Korean">Korean</option>
+                <!--<option value="Bars">Bars</option>--> <!-- has spam -->
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Wine Bars">Wine Bars</option>
+                <option value="Nightlife">Nightlife</option>
+                <option value="American (New)">American (New)</option>
+                <option value="Restaurants">Restaurants</option>
+                <option value="Hawaiian">Hawaiian</option>
+                <option value="Dive Bars">Dive Bars</option>
+                <option value="Arts & Entertainment">Arts & Entertainment</option>
+                <option value="Music Venues">Music Venues</option>
+                <option value="Pubs">Pubs</option>
+                <option value="British">British</option>
+                <option value="Greek">Greek</option> <!-- no spam -->
+                <option value="Vietnamese">Vietnamese</option> <!-- no spam -->
+                <!--<option value="Hardware Stores">Hardware Stores</option>--> <!-- no spam -->
+                <option value="Sandwiches">Sandwiches</option>
+                <option value="Lounges">Lounges</option>
+                <!--<option value="Asian Fusion">Asian Fusion</option>--> <!-- takes ages to load -->
+                <option value="Active Life">Active Life</option> <!-- has spam -->
+                <!--<option value="Russian">Russian</option>--> <!-- no spam -->
+                
                 </select>
 <!--            <input type="text" value="Korean" ng-model="cat"/>-->
                 <i ng-click='showInfo()' class="glyphicon glyphicon-info-sign"></i>

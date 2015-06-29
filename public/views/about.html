@@ -1,1 +1,38 @@
-<p>This is the about view.</p>
+<h1>Opinion Spam Detection</h1>
+
+<div class="c5">The goal of this web application is to make it easier for yelp employees to detect suspicious review activities from users that try to mislead visitors by either giving undeserving positive reviews in some businesses in order to promote them or by giving false negative opinions to some other businesses in order to damage their reputations. We are providing two ways for achieving this objective, the Review Spike Detection (RSD) module and the User Rating Behaviour (URB) module.</div>
+
+<h2>Review Spike Detection</h2>
+
+<div>The RSD method explores the temporal rating information for a given business and detects time periods in which the said business receives a significant boost or loss in their rating score. These periods are possibly the target of either positive or negative spam campaigns.</div>
+
+<div>For detecting these periods, we associate each user review with a score according to the number of stars of the review. Specifically, we assign a 3/-3 score for 5/1 star reviews since we consider them as the most impactful ratings and 1/-1 score for 4/2 star reviews. The 3 star reviews are considered as neutral and are not taken into account.</div>
+
+<div>Furthermore, we assume that the score that each business receives on a given day follows a Gaussian distribution in which the outliers are considered as possible candidates of spam activity. We calculate the average and standard deviation of scores for each business and we consider a day as positive spam campaign candidate when the score received on that day succeeds the upper threshold limit of the average score plus 3 times the standard deviation of scores. Respectively, a negative spam campaign candidate is considered when the daily score is lower than the lower threshold limit of the average score minus 3 times the standard deviation. An example of the results that are produced from the RSD module is shown in the following image, where the days of possible spam activity are coloured yellow. </div>
+
+<div><img alt="RSD.png" src="images/image02.png" style="width: 535.50px; height: 360.26px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/> </div>
+
+<h2>User Rating Behaviour</h2>
+
+<div>The URB module examines the rating behaviour of the users and determines if a user is a spammer or not. We have defined two metrics for measuring the &ldquo;spamminess&rdquo; of the users and the businesses. User Fraud Rating (UFR) measures how much the reviews of a user deviates from the average rating of the business she/he is reviewing and is given by the following formula where rc=the review count and the bc=the number of business that are being reviewed.</div>
+
+<div><img src="images/image00.png"></p>
+
+<br />
+<div>The second metric, Business Fraud Rating (BFR) measures the ratio of the fraud reviewers to the genuine users and is calculated by the formula below</div>
+
+<div><img src="images/image01.png"></div>
+
+<br /><br />
+<div>The final data is visualized as a user-business bipartite graph like the one shown in the following screenshot: </div>
+
+<img alt="RSD.png" src="images/bigraph.png" style="width: 800px; height: 600px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""/>
+
+<ul>
+    <li>On the top left, the dropdown menu can be used to select a business category, as an intuitive filter for the results.</li>
+    <li>Nodes in the graph represent users (triangular nodes) and businesses (circular nodes), while edges correspond to reviews, therefore users can only be directly linked to businesses and vice versa.</li>
+    <li>Some nodes can be orange or red. That indicates fraud suspicion of varying degree. The same, of course, holds for businesses and users alike.</li>
+</ul>
+
+Note: Some categories take a while to appear. As fas as we're concerned, for the most part it's due to performance issues of a library in use (angular-visjs in particular).
+</div>
